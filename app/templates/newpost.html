@@ -5,12 +5,13 @@
     <title>New Post</title>
 </head>
 <body>
-<form action 'add' method='post'>
+<form action="add" method="post">
   <br><td>Title:<input type = 'text' id = 'title' name='title'></td>
-  <br><td>Creation date:<input type = 'text' id = 'created_on' name='created_on'></td>
+  <br><td>Creation date:<input type = 'datetime-local' id = 'created_on' name='created_on'></td>
   <br><td>Author:<input type = 'text' id = 'author' name='author'></td>
   <br><td>Content:<input type = 'text' id = 'text' name='text'></td>
 <br><button>Submit</button>
 </form>
+<form action="/home" method = "get"><button>Voltar</button></form>
 </body>
 </html>
