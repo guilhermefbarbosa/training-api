@@ -38,3 +38,7 @@ class Posts(db.Model):
         self.created_on = created_on
         self.author = author
         self.text = text
+
+    def save(self):
+        db.session.merge(self)
+        db.session.commit()
