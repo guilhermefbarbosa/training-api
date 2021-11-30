@@ -8,6 +8,6 @@ api = Api(
     blueprint,
     title='training-api',
     version='0.0.1',
-    description='Testing for flask apis',
+    description='Testing exercice for flask apis',
 )
 api.add_namespace(api_post, path='/posts')

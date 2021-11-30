@@ -1,0 +1,6 @@
+@charset "UTF-8";
+.button{
+	display: inline-block;
+	width: 200px;
+	color: red;
+}

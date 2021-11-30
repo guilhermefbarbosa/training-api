@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/formStyles.css"/>
     <meta charset="UTF-8">
     <title>New Post</title>
 </head>
+
 <body>
-<form action="add" method="post">
-  <br><td>Title:<input type = 'text' id = 'title' name='title'></td>
-  <br><td>Creation date:<input type = 'datetime-local' id = 'created_on' name='created_on'></td>
-  <br><td>Author:<input type = 'text' id = 'author' name='author'></td>
-  <br><td>Content:<input type = 'text' id = 'text' name='text'></td>
-<br><button>Submit</button>
-</form>
-<form action="/api/posts/get" method = "get"><button>Voltar</button></form>
+    <section>
+        <h3>Inserir Post</h3><br>
+        <div class>
+            <form action="/api/posts/add" method="post">
+                <label for="title"> Título:</label><input type = 'text' id = 'title' name='title'><br>
+                <label for="created_on"> Criado em:</label><input type = 'datetime-local' id = 'created_on' name='created_on'><br>
+                <label for="author"> Autor:</label><input type = 'text' id = 'author' name='author'><br>
+                <label for="text"> Texto:</label><textarea id = 'text' class="text" rows="10" cols="60" name='text'></textarea>
+                <br><br>
+                <button>Salvar</button>
+            </form>
+            <form action="/api/posts/get" method = "get"><button>Voltar</button></form>
+        </div>
+    </section>
 </body>
+
 </html>
