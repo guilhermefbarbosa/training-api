@@ -1,5 +1,6 @@
 import flask
 from app.src.repositories.posts import PostsRepository
+from app.src import Repo_as_DB
 from flask_restx import Namespace, Resource
 import json
 
@@ -13,7 +14,7 @@ api = Namespace(
 class Posts(Resource):
     @api.doc(description='Requisição GET para obter todos os Posts em formato LIST (usado para renderizar o html)')
     def get(self):
-        items = PostsRepository.get_all()
+        items = Repo_as_DB.get_all()
         return flask.make_response(flask.render_template('postlist.html', posts=items), 200, {'Content-Type': 'text/html'})
 
 
@@ -21,8 +22,9 @@ class Posts(Resource):
 class Posts(Resource):
     @api.doc(description='Requisição GET para obter todos os Posts em formato JSON')
     def get(self):
-        items = json.dumps(PostsRepository.get_json())
+        items = Repo_as_DB.get_json()
         return flask.make_response(items, 200, {'Content-Type': 'application/json'})
+        #return flask.make_response(items, 200, {'Content-Type': 'application/json'})
 
 
 @api.route('/new')
@@ -36,7 +38,8 @@ class Posts(Resource):
 class Posts(Resource):
     @api.doc(description='Requisição POST para inserir novo post (objeto) no banco de dados')
     def post(self):
-        PostsRepository.save(flask.request.form['title'], flask.request.form['created_on'], flask.request.form['author'], flask.request.form['text'])
-        items = PostsRepository.get_all()
-        return flask.make_response(flask.render_template('postlist.html',posts=items), 200, {'Content-Type': 'text/html'})
+        Repo_as_DB.save(title=flask.request.form['title'], created_on=flask.request.form['created_on'], author=flask.request.form['author'], text=flask.request.form['text'])
+        print(flask.request.form['created_on'])
+        items = Repo_as_DB.get_all()
+        return flask.make_response(flask.render_template('postlist.html', posts=items), 200, {'Content-Type': 'text/html'})
 

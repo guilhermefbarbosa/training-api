@@ -1,37 +1,9 @@
-from .. import db
+#from .. import db
+#from .. import Repo_as_DB
+from datetime import datetime
 
 
-class Posts(db.Model):
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-        unique=True,
-        nullable=False
-    )
-    title = db.Column(
-        db.String,
-        primary_key=False,
-        unique=False,
-        nullable=False
-    )
-    created_on = db.Column(
-        db.String,
-        primary_key=False,
-        unique=False,
-        nullable=False
-    )
-    author = db.Column(
-        db.String,
-        primary_key=False,
-        unique=False,
-        nullable=False
-    )
-    text = db.Column(
-        db.Text,
-        primary_key=False,
-        unique=False,
-        nullable=False
-    )
+class Posts():
 
     def __init__(self, title=None, created_on=None, author=None, text=None):
         self.title = title
@@ -40,5 +12,35 @@ class Posts(db.Model):
         self.text = text
 
     def save(self):
-        db.session.merge(self)
-        db.session.commit()
+        return True
+        #db.session.merge(self)
+        #db.session.commit()
+
+    def is_valid(self):
+        return self.title is not None and \
+               self.author is not None and\
+               self.text is not None and \
+               self.created_on is not None and\
+               self.valid_date()
+
+    def is_equal(self, post):
+        return \
+            self.title == post.title and\
+            self.created_on == post.created_on and\
+            self.author == post.author and\
+            self.text == post.text
+
+    def valid_date(self):
+        try:
+            datetime.strptime(self.created_on, "%Y-%m-%d")
+            return True
+        except:
+            return False
+
+    def to_serializable(self):
+        return {
+                'title': self.title,
+                'created_on': self.created_on,
+                'author': self.author,
+                'text': self.text
+                }
